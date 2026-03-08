@@ -9,6 +9,10 @@ jobs:
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      statuses: write # Required to report the status check
     steps:
       - uses: actions/checkout@v4
       - name: SonarQube Scan
