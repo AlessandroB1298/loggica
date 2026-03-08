@@ -9,9 +9,16 @@ jobs:
   sonarqube:
     name: SonarQube
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+      statuses: write # Required to report the status check
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # This allows SonarCloud to see the git history
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed for PR decoration
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
