@@ -118,6 +118,14 @@
     --sidebar-ring: oklch(0.556 0 0);
 }
 
+.dark .react-flow__node {
+    color: white;
+}
+
+.light .react-flow__node {
+    color: #111;
+}
+
 @layer base {
     * {
         @apply border-border outline-ring/50;

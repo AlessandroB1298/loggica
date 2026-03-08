@@ -1,47 +1,74 @@
 "use client"
+import { useCallback } from 'react';
+import {
+  ReactFlow,
+  Controls,
+  Background,
+  useNodesState,
+  useEdgesState,
+  addEdge,
+  Connection,
+  BackgroundVariant,
+  DefaultEdgeOptions,
+  Node,
+  OnNodesChange,
+  OnEdgesChange,
+  applyNodeChanges
 
-import { useState, useCallback } from 'react';
-import { ReactFlow, Background, applyNodeChanges, applyEdgeChanges, addEdge, type Node, type Edge, OnNodesChange, OnEdgesChange, OnConnect} from '@xyflow/react';
-import { useTheme } from 'next-themes';
+} from '@xyflow/react';
+import '@xyflow/react/dist/style.css';
+import ElectricConnectionLine from '@/app/components/edges/electricConnectionLine';
+import { nodeTypes } from '@/lib/nodes';
+import { edgeTypes } from '@/lib/edges';
+import { useAtom } from 'jotai';
+import { nodesAtom } from '@/lib/atom/nodes';
 
-const initialNodes : Node[] = [
-  { id: 'n1', position: { x: 0, y: 0 }, data: { label: 'Node 1' } },
-  { id: 'n2', position: { x: 0, y: 100 }, data: { label: 'Node 2' } },
+
+// Default edge options - ensures all new edges are electric type
+const defaultEdgeOptions: DefaultEdgeOptions = {
+  animated: false,
+};
+
+// Initial edges with electric type
+const initialEdges = [
+  { id: 'e1-3', source: '1', target: '3', animated: false },
+  { id: 'e2-3', source: '2', target: '3',  animated: false },
 ];
-const initialEdges : Edge[] = [{ id: 'n1-n2', source: 'n1', target: 'n2' }];
 
-export default function Home() {
-  const { theme } = useTheme(); // Get the current theme
-  const [nodes, setNodes] = useState<Node[]>(initialNodes);
+export default function App() {
 
-  const [edges, setEdges] = useState<Edge[]>(initialEdges);
+  const [nodes, setNodes] = useAtom(nodesAtom)
+  const [edges, setEdges, OnEdgesChange] = useEdgesState(initialEdges);
 
-    const onNodesChange : OnNodesChange= useCallback(
-      (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
-      [],
-    );
-    const onEdgesChange : OnEdgesChange= useCallback(
-      (changes) => setEdges((edgesSnapshot) => applyEdgeChanges(changes, edgesSnapshot)),
-      [],
-    );
-    const onConnect : OnConnect = useCallback(
-      (params) => setEdges((edgesSnapshot) => addEdge(params, edgesSnapshot)),
-      [],
-    );
 
-    return (
-      <div style={{ width: '100vw', height: '100vh' }}>
-        <ReactFlow
-          nodes={nodes}
-          colorMode={theme === 'dark' ? 'dark': 'light'}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          fitView
-        >
-          <Background />
-        </ReactFlow>
-      </div>
-    );
+  const onConnect = useCallback(
+    (params: Connection) => setEdges((eds) => addEdge({ ...params, type: 'electric', animated: true }, eds)),
+    [setEdges],
+  );
+  const onNodesChange : OnNodesChange= useCallback(
+     (changes) => setNodes((nodesSnapshot) => applyNodeChanges(changes, nodesSnapshot)),
+     [setNodes],
+   );
+
+  return (
+    <div style={{ width: '100vw', height: '100vh' }}>
+      <ReactFlow
+        nodes={nodes}
+        defaultEdgeOptions={defaultEdgeOptions}
+        edges={edges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={OnEdgesChange}
+        onConnect={onConnect}
+        nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
+        connectionLineComponent={ElectricConnectionLine}
+        fitView
+      >
+        <Controls className='text-black' />
+        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
+
+      </ReactFlow>
+
+    </div>
+  );
 }
