@@ -1,4 +1,4 @@
-import { ConnectionLineComponentProps, getBezierPath } from '@xyflow/react';
+import { ConnectionLineComponentProps, getBezierPath } from "@xyflow/react";
 
 export default function ElectricConnectionLine({
   fromX,
@@ -21,7 +21,13 @@ export default function ElectricConnectionLine({
     <g>
       <defs>
         {/* Gradient for the electricity */}
-        <linearGradient id="electric-gradient-connection" x1="0%" y1="0%" x2="100%" y2="0%">
+        <linearGradient
+          id="electric-gradient-connection"
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
           <stop offset="0%" stopColor="#3b82f6" stopOpacity="0">
             <animate
               attributeName="offset"
@@ -50,10 +56,10 @@ export default function ElectricConnectionLine({
 
         {/* Glow filter */}
         <filter id="glow-connection">
-          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
           <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
@@ -79,11 +85,7 @@ export default function ElectricConnectionLine({
 
       {/* Sparks */}
       <circle r="3" fill="#60a5fa" filter="url(#glow-connection)">
-        <animateMotion
-          dur="1s"
-          repeatCount="indefinite"
-          path={edgePath}
-        />
+        <animateMotion dur="1s" repeatCount="indefinite" path={edgePath} />
         <animate
           attributeName="opacity"
           values="0;1;1;0"

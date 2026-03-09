@@ -131,7 +131,6 @@ export function AppSidebar() {
                  {isDragging && <DragGhost type={type} />}
                   {gates.map((gate) => {
                     const Icon = gate.icon;
-                    console.log(gate.type)
                     return(
                       <SidebarMenuItem key={gate.name}>
                         <SidebarMenuButton className="w-full" asChild>

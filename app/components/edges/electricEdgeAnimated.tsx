@@ -1,4 +1,9 @@
-import { BaseEdge, EdgeProps, getBezierPath } from '@xyflow/react';
+import { BaseEdge, Edge, EdgeProps, getBezierPath } from "@xyflow/react";
+
+export type CustomEdgeData = {
+  isValid?: boolean;
+};
+export type CustomEdge = Edge<CustomEdgeData, "electric">;
 
 export default function ElectricEdgeAnimated({
   id,
@@ -8,10 +13,9 @@ export default function ElectricEdgeAnimated({
   targetY,
   sourcePosition,
   targetPosition,
-  style = {},
-  markerEnd,
   selected,
-}: EdgeProps) {
+  data,
+}: EdgeProps<CustomEdge>) {
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX,
     sourceY,
@@ -20,13 +24,23 @@ export default function ElectricEdgeAnimated({
     targetY,
     targetPosition,
   });
-
+  const isValid = data?.isValid ?? false;
   return (
     <>
       <defs>
         {/* Gradient for the electricity */}
-        <linearGradient id={`electric-gradient-${id}`} x1="0%" y1="0%" x2="100%" y2="0%">
-          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0">
+        <linearGradient
+          id={`electric-gradient-${id}`}
+          x1="0%"
+          y1="0%"
+          x2="100%"
+          y2="0%"
+        >
+          <stop
+            offset="0%"
+            stopColor={isValid ? "#3b82f6" : "#f63b3b"}
+            stopOpacity="0"
+          >
             <animate
               attributeName="offset"
               values="0;1;1;0"
@@ -34,7 +48,11 @@ export default function ElectricEdgeAnimated({
               repeatCount="indefinite"
             />
           </stop>
-          <stop offset="50%" stopColor="#60a5fa" stopOpacity="1">
+          <stop
+            offset="50%"
+            stopColor={isValid ? "#60a5fa" : "#fa6060"}
+            stopOpacity="1"
+          >
             <animate
               attributeName="offset"
               values="0.5;1;1;0.5"
@@ -42,7 +60,11 @@ export default function ElectricEdgeAnimated({
               repeatCount="indefinite"
             />
           </stop>
-          <stop offset="100%" stopColor="#93c5fd" stopOpacity="0">
+          <stop
+            offset="100%"
+            stopColor={isValid ? "#93c5fd" : "#fd9393"}
+            stopOpacity="0"
+          >
             <animate
               attributeName="offset"
               values="1;1;0;1"
@@ -54,10 +76,10 @@ export default function ElectricEdgeAnimated({
 
         {/* Glow filter */}
         <filter id={`glow-${id}`}>
-          <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+          <feGaussianBlur stdDeviation="2" result="coloredBlur" />
           <feMerge>
-            <feMergeNode in="coloredBlur"/>
-            <feMergeNode in="SourceGraphic"/>
+            <feMergeNode in="coloredBlur" />
+            <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
       </defs>
@@ -66,7 +88,7 @@ export default function ElectricEdgeAnimated({
       <path
         d={edgePath}
         fill="none"
-        stroke="#1e40af"
+        stroke={isValid ? "#1e40af" : "#af1e1e"}
         strokeWidth="2"
         strokeOpacity="0.3"
       />
@@ -82,12 +104,12 @@ export default function ElectricEdgeAnimated({
       />
 
       {/* Sparks - small circles that travel along the path */}
-      <circle r="3" fill="#60a5fa" filter={`url(#glow-${id})`}>
-        <animateMotion
-          dur="1s"
-          repeatCount="indefinite"
-          path={edgePath}
-        />
+      <circle
+        r="3"
+        fill={isValid ? "#60a5fa" : "#fa6060"}
+        filter={`url(#glow-${id})`}
+      >
+        <animateMotion dur="1s" repeatCount="indefinite" path={edgePath} />
         <animate
           attributeName="opacity"
           values="0;1;1;0"
@@ -96,7 +118,11 @@ export default function ElectricEdgeAnimated({
         />
       </circle>
 
-      <circle r="2" fill="#93c5fd" filter={`url(#glow-${id})`}>
+      <circle
+        r="2"
+        fill={isValid ? "#93c5fd" : "#fd9393"}
+        filter={`url(#glow-${id})`}
+      >
         <animateMotion
           dur="1s"
           repeatCount="indefinite"
@@ -112,7 +138,11 @@ export default function ElectricEdgeAnimated({
         />
       </circle>
 
-      <circle r="2.5" fill="#3b82f6" filter={`url(#glow-${id})`}>
+      <circle
+        r="2.5"
+        fill={isValid ? "#3b82f6" : "#f63b3b"}
+        filter={`url(#glow-${id})`}
+      >
         <animateMotion
           dur="1s"
           repeatCount="indefinite"
