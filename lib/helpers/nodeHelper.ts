@@ -19,6 +19,9 @@ export const isNodePowered = (
   currentEdges: CustomEdge[],
   allNodes: AppNode[],
 ): boolean => {
+  if (allNodes[0].type != "switch") {
+    return false;
+  }
   const node = allNodes.find((n) => n.id === nodeId);
   if (!node) return false;
   if (node.type === "switch") {
