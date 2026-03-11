@@ -1,7 +1,7 @@
-import AndGateLogo from "./icons/and-gate-icon";
-import NorGateIcon from "./icons/nor-gate-icon";
-import NotGateIcon from "./icons/not-gate-icon";
-import OrGateIcon from "./icons/or-gate-icon";
+import AndGateIcon from "@/lib/icons/and-gate-icon";
+import NorGateIcon from "@/lib/icons/nor-gate-icon";
+import NotGateIcon from "@/lib/icons/not-gate-icon";
+import OrGateIcon from "@/lib/icons/or-gate-icon";
 import { JSX } from "react/jsx-dev-runtime";
 
 type gate = {
@@ -12,7 +12,7 @@ type gate = {
 export const gates: gate[] = [
   {
     name: "And Gate",
-    icon: AndGateLogo,
+    icon: AndGateIcon,
     type: "andGate",
   },
   {

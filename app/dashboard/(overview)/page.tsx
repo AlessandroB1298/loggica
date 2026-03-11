@@ -15,8 +15,8 @@ import {
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
 import ElectricConnectionLine from "@/app/components/edges/electricConnectionLine";
-import { nodeTypes } from "@/lib/nodes";
-import { edgeTypes } from "@/lib/edges";
+import { nodeTypes } from "@/lib/utils/types/nodes";
+import { edgeTypes } from "@/lib/utils/types/edges";
 import { useAtom } from "jotai";
 import { AppNode, nodesAtom } from "@/lib/atom/nodes";
 import { CustomEdge } from "@/app/components/edges/electricEdgeAnimated";
