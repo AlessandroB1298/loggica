@@ -23,8 +23,7 @@ const config = {
   collectCoverageFrom: [
     "app/**/*.{ts,tsx}", // Adjust this to your source folder
     "lib/**/*.{ts,tsx}", // Adjust this to your source folder
-    "!lib/application.ts",
-    "!lib/applicationStatus.ts",
+    "!lib/utils/types/",
 
     "!./**/*.d.ts", // Ignore type definitions
   ],

@@ -6,7 +6,7 @@ import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ReactFlowProvider } from "@xyflow/react";
 
-describe("Gates", () => {
+describe("Render Gates", () => {
   it("Should render and gate ", () => {
     const { container } = render(
       <ReactFlowProvider>
