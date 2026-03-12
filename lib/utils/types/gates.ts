@@ -4,7 +4,7 @@ import NotGateIcon from "@/lib/icons/not-gate-icon";
 import OrGateIcon from "@/lib/icons/or-gate-icon";
 import { JSX } from "react/jsx-dev-runtime";
 
-type gate = {
+export type gate = {
   name: string;
   icon: () => JSX.Element;
   type: string;

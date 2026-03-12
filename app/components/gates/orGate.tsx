@@ -1,27 +1,26 @@
-import React from 'react';
-import { Handle,  Position, type NodeProps } from '@xyflow/react';
+import React from "react";
+import { Handle, Position } from "@xyflow/react";
 
-
-export default function OrGate({}: NodeProps){
+export default function OrGate() {
   return (
-    <div style={{ position: 'relative', width: 100, height: 60, padding: 10 }}>
+    <div style={{ position: "relative", width: 100, height: 60, padding: 10 }}>
       {/* Target Handles (inputs) - positioned at the two input lines */}
       <Handle
         type="target"
         position={Position.Left}
         id="input-1"
-        style={{ top: '35%' }}
+        style={{ top: "35%" }}
       />
       <Handle
         type="target"
         position={Position.Left}
         id="input-2"
-        style={{ top: '75%' }}
+        style={{ top: "75%" }}
       />
 
       {/* Custom SVG content */}
-     <div className='text-foreground'>
-       <svg
+      <div className="text-foreground">
+        <svg
           viewBox="0 0 100 60"
           fill="none"
           stroke="currentColor"
@@ -37,14 +36,14 @@ export default function OrGate({}: NodeProps){
           {/* Output line */}
           <line x1="80" y1="30" x2="100" y2="30" />
         </svg>
-     </div>
+      </div>
 
       {/* Source Handle (output) - positioned at the output line on the right */}
       <Handle
         type="source"
         position={Position.Right}
         id="output"
-        style={{ top: '57%' }}
+        style={{ top: "57%" }}
       />
     </div>
   );

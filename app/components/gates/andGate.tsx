@@ -1,52 +1,54 @@
-import React from 'react';
-import { Handle,  Position, type NodeProps } from '@xyflow/react';
+import React from "react";
+import { Handle, Position } from "@xyflow/react";
 
-
-export default function AndGate({}: NodeProps){
+export default function AndGate() {
   return (
-    <div style={{ position: 'relative', width: 100, height: 60, padding: 10 }}>
+    <div style={{ position: "relative", width: 100, height: 60, padding: 10 }}>
       {/* Target Handles (inputs) - positioned at the two input lines */}
       <Handle
         type="target"
         position={Position.Left}
         id="input-1"
-        style={{ top: '35%' }}
+        style={{ top: "35%" }}
       />
       <Handle
         type="target"
         position={Position.Left}
         id="input-2"
-        style={{ top: '75%' }}
+        style={{ top: "75%" }}
       />
 
       {/* Custom SVG content */}
-     <div className='text-foreground'>
-       <svg
+      <div className="text-foreground">
+        <svg
+          data-testid="andGate"
+          viewBox="0 0 100 60"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          style={{ display: "block" }}
+        >
+          {/* Input lines */}
+          <line x1="0" y1="15" x2="30" y2="15" />
+          <line x1="0" y1="45" x2="30" y2="45" />
 
-         viewBox="0 0 100 60"
-         fill="none"
-         stroke="currentColor"
-         strokeWidth="2"
-         style={{ display: 'block' }}
-       >
-         {/* Input lines */}
-         <line x1="0" y1="15" x2="30" y2="15" />
-         <line x1="0" y1="45" x2="30" y2="45" />
+          {/* Gate body */}
+          <path
+            d="M 30 5 L 50 5 Q 80 5 80 30 Q 80 55 50 55 L 30 55 Z"
+            fill="none"
+          />
 
-         {/* Gate body */}
-         <path d="M 30 5 L 50 5 Q 80 5 80 30 Q 80 55 50 55 L 30 55 Z" fill="none" />
-
-         {/* Output line */}
-         <line x1="80" y1="30" x2="100" y2="30" />
-       </svg>
-     </div>
+          {/* Output line */}
+          <line x1="80" y1="30" x2="100" y2="30" />
+        </svg>
+      </div>
 
       {/* Source Handle (output) - positioned at the output line on the right */}
       <Handle
         type="source"
         position={Position.Right}
         id="output"
-        style={{ top: '57%' }}
+        style={{ top: "57%" }}
       />
     </div>
   );
