@@ -1,17 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "./components/themeProvider";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+import { ReactFlowProvider } from "@xyflow/react";
 
 export const metadata: Metadata = {
   title: "Loggica",
@@ -27,16 +17,14 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body>
         <ThemeProvider
-            attribute="class"
-            defaultTheme="dark"
-            themes={['light', 'dark']}
-
-          >
-             <main>
-                {children}
-             </main>
-
-           </ThemeProvider>
+          attribute="class"
+          defaultTheme="dark"
+          themes={["light", "dark"]}
+        >
+          <ReactFlowProvider>
+            <main>{children}</main>
+          </ReactFlowProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -8,13 +8,13 @@ export default function OrGate() {
       <Handle
         type="target"
         position={Position.Left}
-        id="input-1"
+        id="or-input-1"
         style={{ top: "35%" }}
       />
       <Handle
         type="target"
         position={Position.Left}
-        id="input-2"
+        id="or-input-2"
         style={{ top: "75%" }}
       />
 
@@ -42,7 +42,7 @@ export default function OrGate() {
       <Handle
         type="source"
         position={Position.Right}
-        id="output"
+        id="or-output"
         style={{ top: "57%" }}
       />
     </div>

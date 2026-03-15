@@ -1,5 +1,4 @@
-import React from "react";
-import { Handle, Position } from "@xyflow/react";
+import { Handle, NodeProps, Position } from "@xyflow/react";
 
 export default function AndGate() {
   return (
@@ -8,13 +7,13 @@ export default function AndGate() {
       <Handle
         type="target"
         position={Position.Left}
-        id="input-1"
+        id="and-input-1"
         style={{ top: "35%" }}
       />
       <Handle
         type="target"
         position={Position.Left}
-        id="input-2"
+        id="and-input-2"
         style={{ top: "75%" }}
       />
 
@@ -47,7 +46,7 @@ export default function AndGate() {
       <Handle
         type="source"
         position={Position.Right}
-        id="output"
+        id="and-output"
         style={{ top: "57%" }}
       />
     </div>

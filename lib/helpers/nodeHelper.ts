@@ -1,5 +1,6 @@
 import { CustomEdge } from "@/app/components/edges/electricEdgeAnimated";
 import { AppNode } from "../atom/nodes";
+import { useMemo } from "react";
 
 /*
  isNodePowered:
@@ -24,6 +25,7 @@ export const isNodePowered = (
   if (node.type === "switch") {
     return !!node.data.isOn;
   }
+
   // Check if any incoming edge is powered
   const incoming = currentEdges.filter((e) => e.target === nodeId);
   return incoming.some((edge) =>

@@ -8,7 +8,7 @@ type SwitchProps = {
 
 export const switches: SwitchProps[] = [
   {
-    name: "lever",
+    name: "Lever",
     icon: SwitchIcon,
     type: "switch",
   },

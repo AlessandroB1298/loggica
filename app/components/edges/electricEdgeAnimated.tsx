@@ -1,4 +1,4 @@
-import { BaseEdge, Edge, EdgeProps, getBezierPath } from "@xyflow/react";
+import { Edge, EdgeProps, getBezierPath } from "@xyflow/react";
 
 export type CustomEdgeData = {
   isValid?: boolean;
