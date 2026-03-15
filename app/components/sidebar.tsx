@@ -24,7 +24,7 @@ import { XYPosition } from "@xyflow/react";
 import { DragGhost } from "./dragGhost";
 import { Button } from "@/components/ui/button";
 import { switches } from "@/lib/utils/types/switches";
-
+import { v4 as uuidv4 } from "uuid"; // Import v4 and alias it as uuidv4
 type proj = {
   projectName: string;
 };
@@ -36,8 +36,8 @@ const projects: proj[] = [
   { projectName: "proj5" },
 ];
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
+const id = 0;
+const getId = () => `dndnode_${uuidv4()}`;
 
 export function AppSidebar() {
   const { onDragStart, isDragging } = useDnD();
@@ -101,7 +101,7 @@ export function AppSidebar() {
                 const Icon = sw.icon;
                 return (
                   <SidebarMenuItem key={sw.type}>
-                    <SidebarMenuButton className="w-full" asChild>
+                    <SidebarMenuButton className="w-full h-16" asChild>
                       <div
                         onPointerDown={(event) => {
                           setType(sw.type);
@@ -109,8 +109,10 @@ export function AppSidebar() {
                         }}
                         className="cursor-grab"
                       >
-                        <Icon />
-                        {sw.name.split(" ")[0].toUpperCase()}
+                        <div className="flex flex-row gap-2 items-center">
+                          <Icon />
+                          <div className="mt-3">{sw.name}</div>
+                        </div>
                       </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
@@ -124,7 +126,7 @@ export function AppSidebar() {
                 const Icon = gate.icon;
                 return (
                   <SidebarMenuItem key={gate.name}>
-                    <SidebarMenuButton className="w-full" asChild>
+                    <SidebarMenuButton className="w-full h-16 " asChild>
                       <div
                         onPointerDown={(event) => {
                           setType(gate.type);
@@ -132,8 +134,10 @@ export function AppSidebar() {
                         }}
                         className="cursor-grab"
                       >
-                        <Icon />
-                        {gate.name.split(" ")[0].toUpperCase()}
+                        <div className="flex flex-row items-center gap-2">
+                          <Icon />
+                          {gate.name}
+                        </div>
                       </div>
                     </SidebarMenuButton>
                   </SidebarMenuItem>

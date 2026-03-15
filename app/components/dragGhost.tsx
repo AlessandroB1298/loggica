@@ -1,41 +1,42 @@
-"use client"
+"use client";
 
-import { useDnDPosition } from '@/app/context/DnDContext';
-import AndGateLogo from '@/lib/icons/and-gate-icon';
-import NorGateIcon from '@/lib/icons/nor-gate-icon';
-import NotGateIcon from '@/lib/icons/not-gate-icon';
-import OrGateIcon from '@/lib/icons/or-gate-icon';
-import SwitchIcon from '@/lib/icons/switch-icon';
-import { ReactNode } from 'react';
+import { useDnDPosition } from "@/app/context/DnDContext";
+
+import SwitchIcon from "@/lib/icons/switch-icon";
+import { ReactNode } from "react";
+import AndGate from "./gates/andGate";
+import OrGate from "./gates/orGate";
+import NorGate from "./gates/norGate";
+import NotGate from "./gates/notGate";
 
 interface DragGhostProps {
   type: string | null;
 }
 
-export function DragGhost({type }: DragGhostProps) {
+export function DragGhost({ type }: DragGhostProps) {
   const { position } = useDnDPosition();
 
   if (!position || !type) return null;
 
-  const renderPreview=(type : string | null):ReactNode=>{
-    switch (type){
-      case "andGate":{
-        return <AndGateLogo/>
+  const renderPreview = (type: string | null): ReactNode => {
+    switch (type) {
+      case "andGate": {
+        return <AndGate />;
       }
-      case "orGate":{
-        return <OrGateIcon/>
+      case "orGate": {
+        return <OrGate />;
       }
-      case "norGate":{
-        return <NorGateIcon/>
+      case "norGate": {
+        return <NorGate />;
       }
-      case  "notGate":{
-        return <NotGateIcon/>
+      case "notGate": {
+        return <NotGate />;
       }
-      case  "switch":{
-        return <SwitchIcon/>
+      case "switch": {
+        return <SwitchIcon />;
       }
     }
-  }
+  };
   return (
     <div
       className="fixed pointer-events-none z-9999"

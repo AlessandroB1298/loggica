@@ -7,13 +7,13 @@ export default function NorGate() {
       <Handle
         type="target"
         position={Position.Left}
-        id="input-1"
+        id="nor-input-1"
         style={{ top: "35%" }}
       />
       <Handle
         type="target"
         position={Position.Left}
-        id="input-2"
+        id="nor-input-2"
         style={{ top: "75%" }}
       />
 
@@ -36,15 +36,14 @@ export default function NorGate() {
           <circle cx="85" cy="30" r="5" fill="white" />
 
           {/* Output line */}
-          <line x1="90" y1="30" x2="130" y2="30" />
+          <line x1="90" y1="30" x2="100" y2="30" />
         </svg>
       </div>
 
-      {/* Source Handle (output) - positioned at the output line on the right */}
       <Handle
         type="source"
         position={Position.Right}
-        id="output"
+        id="nor-output"
         style={{ top: "57%" }}
       />
     </div>

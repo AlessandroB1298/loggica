@@ -7,7 +7,7 @@ export default function NotGate() {
       <Handle
         type="target"
         position={Position.Left}
-        id="input-1"
+        id="not-input-1"
         style={{ top: "50%" }}
       />
 
@@ -32,7 +32,6 @@ export default function NotGate() {
         </svg>
       </div>
 
-      {/* Source Handle (output) - positioned at the output line on the right */}
       <Handle
         type="source"
         position={Position.Right}

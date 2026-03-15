@@ -18,7 +18,7 @@ import ElectricConnectionLine from "@/app/components/edges/electricConnectionLin
 import { nodeTypes } from "@/lib/utils/types/nodes";
 import { edgeTypes } from "@/lib/utils/types/edges";
 import { useAtom } from "jotai";
-import { AppNode, nodesAtom } from "@/lib/atom/nodes";
+import { AppNode, edgesAtom, nodesAtom } from "@/lib/atom/nodes";
 import { CustomEdge } from "@/app/components/edges/electricEdgeAnimated";
 import { isNodePowered } from "@/lib/helpers/nodeHelper";
 
@@ -30,7 +30,7 @@ const defaultEdgeOptions: DefaultEdgeOptions = {
 
 export default function App() {
   const [nodes, setNodes] = useAtom(nodesAtom);
-  const [edges, setEdges] = useState<CustomEdge[]>([]);
+  const [edges, setEdges] = useAtom(edgesAtom);
 
   const validatedEdges = useMemo(() => {
     if (!edges) return [];
@@ -55,7 +55,7 @@ export default function App() {
               ...params,
               type: "electric",
               animated: true,
-              data: { isValid: true }, // Initial state
+              data: { isValid: false }, // Initial state
             },
             eds || [],
           ) as CustomEdge[],
@@ -96,7 +96,6 @@ export default function App() {
         fitView
       >
         <Controls className="text-black" />
-        <Background variant={BackgroundVariant.Dots} gap={12} size={1} />
       </ReactFlow>
     </div>
   );
