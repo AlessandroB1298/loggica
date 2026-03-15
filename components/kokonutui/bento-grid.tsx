@@ -135,7 +135,7 @@ const features: Feature[] = [
     cta: "Learn More",
     className: "lg:col-span-1",
     background: (
-      <div className="absolute inset-0 bg-amber-50 dark:bg-amber-950/20" />
+      <div className="absolute inset-0 bg-amber-100/30 dark:bg-amber-950/20" />
     ),
   },
   {
@@ -147,7 +147,7 @@ const features: Feature[] = [
     className: "lg:col-span-1.5",
 
     background: (
-      <div className="absolute inset-0 bg-amber-50 dark:bg-green-950/20" />
+      <div className="absolute inset-0 bg-green-100/30 dark:bg-green-950/20" />
     ),
   },
   {
@@ -158,7 +158,7 @@ const features: Feature[] = [
     cta: "Learn More",
     className: "lg:col-span-1",
     background: (
-      <div className="absolute inset-0 bg-amber-50 dark:bg-blue-950/20" />
+      <div className="absolute inset-0 bg-blue-100/30 dark:bg-blue-950/20" />
     ),
   },
   {
@@ -169,7 +169,7 @@ const features: Feature[] = [
     cta: "Learn More",
     className: "lg:col-span-1",
     background: (
-      <div className="absolute inset-0 bg-amber-50 dark:bg-red-950/20" />
+      <div className="absolute inset-0 bg-red-100/30 dark:bg-red-950/20" />
     ),
   },
 ];
