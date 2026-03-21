@@ -1,6 +1,5 @@
 "use client";
 import { LoggicaIcon } from "@/lib/icons/loggica-icon";
-import React from "react";
 
 function Footer2() {
   const navLinks = [

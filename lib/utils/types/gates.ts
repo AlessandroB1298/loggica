@@ -1,8 +1,19 @@
+import { AppNode } from "@/lib/atom/nodes";
 import AndGateIcon from "@/lib/icons/and-gate-icon";
 import NorGateIcon from "@/lib/icons/nor-gate-icon";
 import NotGateIcon from "@/lib/icons/not-gate-icon";
 import OrGateIcon from "@/lib/icons/or-gate-icon";
 import { JSX } from "react/jsx-dev-runtime";
+import { CustomEdge } from "./edges";
+
+export type handleGateProps = {
+  incoming: CustomEdge[];
+  nodeId: string;
+  currentEdges: CustomEdge[];
+  allNodes: AppNode[];
+  visited: Set<string>;
+  depth: number;
+};
 
 export type gate = {
   name: string;

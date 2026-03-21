@@ -1,7 +1,8 @@
 import { Handle, NodeProps, Position, useReactFlow } from "@xyflow/react";
 import { motion } from "motion/react";
+import { memo } from "react";
 
-export default function Switch({
+export const Switch = memo(function Switch({
   id,
   data, // Standard React Flow prop
   width = 80,
@@ -224,9 +225,9 @@ export default function Switch({
       <Handle
         type="source"
         position={Position.Right}
-        id="input-1"
+        id={`switch-output-${id}`} // Use a predictable pattern
         style={{ top: "65%", left: "80%" }}
       />
     </div>
   );
-}
+});

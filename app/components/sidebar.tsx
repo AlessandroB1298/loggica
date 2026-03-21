@@ -3,9 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import {
   Sidebar,
   SidebarContent,
-  SidebarFooter,
   SidebarGroup,
-  SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenuButton,
@@ -13,58 +11,34 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 import { Cpu, Projector, UserIcon } from "lucide-react";
-import ThemeSwitcher from "./themeSelector";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { gates } from "@/lib/utils/types/gates";
-import { useAtom } from "jotai";
-import { nodesAtom } from "@/lib/atom/nodes";
-import { OnDropAction, useDnD } from "../context/DnDContext";
-import { useCallback, useState } from "react";
+import { useSetAtom } from "jotai";
+import { onCreateNewNode } from "@/lib/atom/nodes";
+import { useDnD } from "../context/DnDContext";
+import { memo, useCallback, useState } from "react";
 import { XYPosition } from "@xyflow/react";
 import { DragGhost } from "./dragGhost";
 import { Button } from "@/components/ui/button";
 import { switches } from "@/lib/utils/types/switches";
-import { v4 as uuidv4 } from "uuid"; // Import v4 and alias it as uuidv4
-type proj = {
-  projectName: string;
-};
-const projects: proj[] = [
-  { projectName: "proj1" },
-  { projectName: "proj2" },
-  { projectName: "proj3" },
-  { projectName: "proj4" },
-  { projectName: "proj5" },
-];
+import { outputs } from "@/lib/utils/types/outputs";
+import { projects } from "@/lib/constants/projects";
 
-const id = 0;
-const getId = () => `dndnode_${uuidv4()}`;
-
-export function AppSidebar() {
+export const AppSidebar = memo(function AppSidebar() {
   const { onDragStart, isDragging } = useDnD();
-  // The type of the node that is being dragged.
   const [type, setType] = useState<string | null>(null);
+  const createNewNode = useSetAtom(onCreateNewNode);
 
-  const [nodes, setNodes] = useAtom(nodesAtom);
-
-  const createAddNewNode = useCallback(
-    (nodeType: string): OnDropAction => {
-      return ({ position }: { position: XYPosition }) => {
-        const newNode = {
-          id: getId(),
-          type: nodeType,
-          position,
-          data: { label: `${nodeType} node` },
-        };
-
-        setNodes((nds) => nds.concat(newNode));
-        setType(null);
-      };
-    },
-    [setNodes, setType],
+  const addNewNode = useCallback(
+    (nodeType: string) =>
+      ({ position }: { position: XYPosition }) => {
+        createNewNode({ nodeType, position });
+      },
+    [createNewNode],
   );
 
   return (
-    <Sidebar variant="floating" collapsible="offcanvas">
+    <Sidebar variant="floating" collapsible="offcanvas" className="">
       <SidebarHeader className="flex flex-row gap-4">
         <UserIcon />
         User
@@ -93,7 +67,7 @@ export function AppSidebar() {
           </SidebarContent>
         </TabsContent>
         <TabsContent value="logic">
-          <SidebarContent className="flex z-50 items-center flex-wrap w-full mt-2">
+          <SidebarContent className=" z-50 items-center  w-full mt-2">
             <SidebarGroup>
               <SidebarGroupLabel>Switches</SidebarGroupLabel>
               {isDragging && <DragGhost type={type} />}
@@ -105,13 +79,12 @@ export function AppSidebar() {
                       <div
                         onPointerDown={(event) => {
                           setType(sw.type);
-                          onDragStart(event, createAddNewNode(sw.type));
+                          onDragStart(event, addNewNode(sw.type));
                         }}
                         className="cursor-grab"
                       >
                         <div className="flex flex-row gap-2 items-center">
                           <Icon />
-                          <div className="mt-3">{sw.name}</div>
                         </div>
                       </div>
                     </SidebarMenuButton>
@@ -120,17 +93,42 @@ export function AppSidebar() {
               })}
             </SidebarGroup>
             <SidebarGroup>
+              <SidebarGroupLabel>Outputs</SidebarGroupLabel>
+              {isDragging && <DragGhost type={type} />}
+              {outputs.map((output) => {
+                const Icon = output.icon;
+                return (
+                  <SidebarMenuItem key={output.type}>
+                    <SidebarMenuButton className="w-full h-16" asChild>
+                      <div
+                        onPointerDown={(event) => {
+                          setType(output.type);
+                          onDragStart(event, addNewNode(output.type));
+                        }}
+                        className="cursor-grab"
+                      >
+                        <div className="flex flex-row gap-2 items-center">
+                          <Icon />
+                        </div>
+                      </div>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                );
+              })}
+            </SidebarGroup>
+
+            <SidebarGroup>
               <SidebarGroupLabel>Logical Gates</SidebarGroupLabel>
               {isDragging && <DragGhost type={type} />}
               {gates.map((gate) => {
                 const Icon = gate.icon;
                 return (
                   <SidebarMenuItem key={gate.name}>
-                    <SidebarMenuButton className="w-full h-16 " asChild>
+                    <SidebarMenuButton className="w-full h-auto " asChild>
                       <div
                         onPointerDown={(event) => {
                           setType(gate.type);
-                          onDragStart(event, createAddNewNode(gate.type));
+                          onDragStart(event, addNewNode(gate.type));
                         }}
                         className="cursor-grab"
                       >
@@ -161,15 +159,7 @@ export function AppSidebar() {
           </SidebarContent>
         </TabsContent>
       </Tabs>
-      <SidebarFooter>
-        <SidebarGroup>
-          <SidebarGroupLabel>Theme</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <ThemeSwitcher />
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarFooter>
       <SidebarRail />
     </Sidebar>
   );
-}
+});

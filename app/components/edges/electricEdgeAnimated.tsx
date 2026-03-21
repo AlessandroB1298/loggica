@@ -1,11 +1,8 @@
-import { Edge, EdgeProps, getBezierPath } from "@xyflow/react";
+import { CustomEdge } from "@/lib/utils/types/edges";
+import { EdgeProps, getBezierPath } from "@xyflow/react";
+import { memo } from "react";
 
-export type CustomEdgeData = {
-  isValid?: boolean;
-};
-export type CustomEdge = Edge<CustomEdgeData, "electric">;
-
-export default function ElectricEdgeAnimated({
+export const ElectricEdgeAnimated = memo(function ElectricEdgeAnimated({
   id,
   sourceX,
   sourceY,
@@ -159,4 +156,4 @@ export default function ElectricEdgeAnimated({
       </circle>
     </>
   );
-}
+});

@@ -1,100 +1,45 @@
 "use client";
-import { useCallback, useMemo, useState } from "react";
 import {
   ReactFlow,
   Controls,
   Background,
-  addEdge,
-  Connection,
   BackgroundVariant,
-  DefaultEdgeOptions,
-  OnNodesChange,
-  OnEdgesChange,
-  applyNodeChanges,
-  applyEdgeChanges,
 } from "@xyflow/react";
 import "@xyflow/react/dist/style.css";
-import ElectricConnectionLine from "@/app/components/edges/electricConnectionLine";
+import { ElectricConnectionLine } from "@/app/components/edges/electricConnectionLine";
 import { nodeTypes } from "@/lib/utils/types/nodes";
 import { edgeTypes } from "@/lib/utils/types/edges";
-import { useAtom } from "jotai";
-import { AppNode, edgesAtom, nodesAtom } from "@/lib/atom/nodes";
-import { CustomEdge } from "@/app/components/edges/electricEdgeAnimated";
-import { isNodePowered } from "@/lib/helpers/nodeHelper";
-
-// Default edge options - ensures all new edges are electric type
-const defaultEdgeOptions: DefaultEdgeOptions = {
-  animated: false,
-  type: "electric",
-};
+import { onNodesChangeAtom } from "@/lib/atom/nodes";
+import useValidateNodes from "@/app/hooks/useValidateNodes";
+import { useSetAtom } from "jotai";
+import { onConnectChange, onEdgesChange } from "@/lib/atom/edges";
+import {
+  defaultEdgeOptions,
+  propOptions,
+} from "@/lib/constants/initial-setup-data";
 
 export default function App() {
-  const [nodes, setNodes] = useAtom(nodesAtom);
-  const [edges, setEdges] = useAtom(edgesAtom);
+  const onEdgeChange = useSetAtom(onEdgesChange);
+  const onNodesChange = useSetAtom(onNodesChangeAtom);
+  const onConnection = useSetAtom(onConnectChange);
+  const { nds, eds } = useValidateNodes();
 
-  const validatedEdges = useMemo(() => {
-    if (!edges) return [];
-    return edges.map((edge) => {
-      const valid = isNodePowered(edge.source, edges, nodes);
-      return {
-        ...edge,
-        data: {
-          ...edge.data,
-          isValid: valid,
-        },
-      };
-    });
-  }, [edges, nodes]);
-
-  const onConnect = useCallback(
-    (params: Connection) =>
-      setEdges(
-        (eds) =>
-          addEdge(
-            {
-              ...params,
-              type: "electric",
-              animated: true,
-              data: { isValid: false }, // Initial state
-            },
-            eds || [],
-          ) as CustomEdge[],
-      ),
-    [setEdges],
-  );
-
-  const onNodesChange: OnNodesChange = useCallback(
-    (changes) =>
-      setNodes(
-        (nodesSnapshot) =>
-          applyNodeChanges(changes, nodesSnapshot || []) as AppNode[],
-      ),
-    [setNodes],
-  );
-
-  const onEdgesChange: OnEdgesChange = useCallback(
-    (changes) =>
-      setEdges(
-        (eds) =>
-          // We cast the result to CustomEdge[] to satisfy the state type
-          applyEdgeChanges(changes, eds || []) as CustomEdge[],
-      ),
-    [setEdges],
-  );
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow
-        nodes={nodes}
+        nodes={nds}
         defaultEdgeOptions={defaultEdgeOptions}
-        edges={validatedEdges}
+        edges={eds}
         onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        onConnect={onConnect}
+        onEdgesChange={onEdgeChange}
+        onConnect={onConnection}
         nodeTypes={nodeTypes}
         edgeTypes={edgeTypes}
         connectionLineComponent={ElectricConnectionLine}
+        proOptions={propOptions}
         fitView
       >
+        <Background variant={BackgroundVariant.Dots} />
         <Controls className="text-black" />
       </ReactFlow>
     </div>

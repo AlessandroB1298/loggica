@@ -1,9 +1,9 @@
-import ElectricConnectionLine from "@/app/components/edges/electricConnectionLine";
+import { ElectricConnectionLine } from "@/app/components/edges/electricConnectionLine";
 import {
   defaultEdgeOptions,
   initialEdges,
   initialNodes,
-  proOptions,
+  propOptions,
 } from "@/lib/constants/initial-setup-data";
 import { edgeTypes } from "@/lib/utils/types/edges";
 import { nodeTypes } from "@/lib/utils/types/nodes";
@@ -26,7 +26,7 @@ export default function ReactFlowDemoStatic() {
       elementsSelectable={false}
       nodesDraggable={false}
       nodesConnectable={false}
-      proOptions={proOptions}
+      proOptions={propOptions}
     ></ReactFlow>
   );
 }

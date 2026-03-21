@@ -1,7 +1,7 @@
-import React from "react";
+import { memo } from "react";
 import { Handle, Position } from "@xyflow/react";
 
-export default function OrGate() {
+export const OrGate = memo(function OrGate() {
   return (
     <div style={{ position: "relative", width: 100, height: 60, padding: 10 }}>
       {/* Target Handles (inputs) - positioned at the two input lines */}
@@ -47,4 +47,4 @@ export default function OrGate() {
       />
     </div>
   );
-}
+});

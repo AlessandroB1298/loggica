@@ -1,6 +1,8 @@
-import { Handle, Position } from "@xyflow/react";
+import { AppNode } from "@/lib/utils/types/nodes";
+import { Handle, NodeProps, Position } from "@xyflow/react";
+import { memo } from "react";
 
-export default function NorGate() {
+export const NorGate = memo(function NorGate({ id }: NodeProps<AppNode>) {
   return (
     <div style={{ position: "relative", width: 100, height: 60, padding: 10 }}>
       {/* Target Handles (inputs) - positioned at the two input lines */}
@@ -48,4 +50,4 @@ export default function NorGate() {
       />
     </div>
   );
-}
+});

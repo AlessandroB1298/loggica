@@ -1,6 +1,7 @@
 import { ConnectionLineComponentProps, getBezierPath } from "@xyflow/react";
+import { memo } from "react";
 
-export default function ElectricConnectionLine({
+export const ElectricConnectionLine = memo(function ElectricConnectionLine({
   fromX,
   fromY,
   toX,
@@ -111,4 +112,4 @@ export default function ElectricConnectionLine({
       </circle>
     </g>
   );
-}
+});

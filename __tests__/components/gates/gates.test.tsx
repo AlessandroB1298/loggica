@@ -1,7 +1,7 @@
-import AndGate from "@/app/components/gates/andGate";
-import NorGate from "@/app/components/gates/norGate";
-import NotGate from "@/app/components/gates/notGate";
-import OrGate from "@/app/components/gates/orGate";
+import { AndGate } from "@/app/components/gates/andGate";
+import { NorGate } from "@/app/components/gates/norGate";
+import { NotGate } from "@/app/components/gates/notGate";
+import { OrGate } from "@/app/components/gates/orGate";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ReactFlowProvider } from "@xyflow/react";
