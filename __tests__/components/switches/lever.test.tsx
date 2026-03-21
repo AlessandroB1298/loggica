@@ -1,4 +1,4 @@
-import Switch from "@/app/components/switches/switch";
+import { Switch } from "@/app/components/switches/switch";
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ReactFlowProvider } from "@xyflow/react";

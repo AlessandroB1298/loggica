@@ -4,10 +4,11 @@ import { useDnDPosition } from "@/app/context/DnDContext";
 
 import SwitchIcon from "@/lib/icons/switch-icon";
 import { ReactNode } from "react";
-import AndGate from "./gates/andGate";
-import OrGate from "./gates/orGate";
-import NorGate from "./gates/norGate";
-import NotGate from "./gates/notGate";
+import LightBulbIcon from "@/lib/icons/light-bulb-icon";
+import AndGateIcon from "@/lib/icons/and-gate-icon";
+import OrGateIcon from "@/lib/icons/or-gate-icon";
+import NorGateIcon from "@/lib/icons/nor-gate-icon";
+import NotGateIcon from "@/lib/icons/not-gate-icon";
 
 interface DragGhostProps {
   type: string | null;
@@ -21,19 +22,22 @@ export function DragGhost({ type }: DragGhostProps) {
   const renderPreview = (type: string | null): ReactNode => {
     switch (type) {
       case "andGate": {
-        return <AndGate />;
+        return <AndGateIcon />;
       }
       case "orGate": {
-        return <OrGate />;
+        return <OrGateIcon />;
       }
       case "norGate": {
-        return <NorGate />;
+        return <NorGateIcon />;
       }
       case "notGate": {
-        return <NotGate />;
+        return <NotGateIcon />;
       }
       case "switch": {
         return <SwitchIcon />;
+      }
+      case "lightBulb": {
+        return <LightBulbIcon />;
       }
     }
   };

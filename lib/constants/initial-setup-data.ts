@@ -41,4 +41,4 @@ export const initialEdges = [
     data: { isValid: false },
   },
 ];
-export const proOptions = { hideAttribution: true };
+export const propOptions = { hideAttribution: true };

@@ -1,19 +1,22 @@
-import { Handle, NodeProps, Position } from "@xyflow/react";
+"use client";
+import { AppNode } from "@/lib/utils/types/nodes";
+import { Handle, Position, NodeProps } from "@xyflow/react";
+import { memo } from "react";
 
-export default function AndGate() {
+export const AndGate = memo(function AndGate({ id }: NodeProps<AppNode>) {
   return (
     <div style={{ position: "relative", width: 100, height: 60, padding: 10 }}>
       {/* Target Handles (inputs) - positioned at the two input lines */}
       <Handle
         type="target"
         position={Position.Left}
-        id="and-input-1"
+        id={`andGate-input-1-${id}`}
         style={{ top: "35%" }}
       />
       <Handle
         type="target"
         position={Position.Left}
-        id="and-input-2"
+        id={`andGate-input-2-${id}`}
         style={{ top: "75%" }}
       />
 
@@ -51,4 +54,4 @@ export default function AndGate() {
       />
     </div>
   );
-}
+});

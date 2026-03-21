@@ -1,13 +1,15 @@
-import { Handle, Position } from "@xyflow/react";
+import { AppNode } from "@/lib/utils/types/nodes";
+import { Handle, NodeProps, Position } from "@xyflow/react";
+import { memo } from "react";
 
-export default function NotGate() {
+export const NotGate = memo(function NotGate({ id }: NodeProps<AppNode>) {
   return (
     <div style={{ position: "relative", width: 100, height: 60, padding: 10 }}>
       {/* Target Handles (inputs) - positioned at the two input lines */}
       <Handle
         type="target"
         position={Position.Left}
-        id="not-input-1"
+        id={`not-input-${id}`} // Use the node id here too
         style={{ top: "50%" }}
       />
 
@@ -40,4 +42,4 @@ export default function NotGate() {
       />
     </div>
   );
-}
+});

@@ -1,8 +1,3 @@
-/**
- * For a detailed explanation regarding each configuration property, visit:
- * https://jestjs.io/docs/configuration
- */
-
 import nextJest from "next/jest";
 
 const createJestConfig = nextJest({
@@ -19,12 +14,12 @@ const config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },
+
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
     "app/**/*.{ts,tsx}", // Adjust this to your source folder
     "lib/**/*.{ts,tsx}", // Adjust this to your source folder
     "!lib/utils/types/**",
-
     "!./**/*.d.ts", // Ignore type definitions
   ],
 };
