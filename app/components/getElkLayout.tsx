@@ -5,6 +5,7 @@ export type DagreLayoutDirections = "TB" | "LR";
 export type ElkDirectionType = "RIGHT" | "LEFT" | "UP" | "DOWN";
 import { CustomEdge } from "@/lib/utils/types/edges";
 import { AppNode } from "@/lib/utils/types/nodes";
+
 export default async function getElkLayout(
   appNodes: AppNode[] = [],
   customEdges: CustomEdge[] = [],
@@ -36,7 +37,7 @@ export default async function getElkLayout(
       "elk.edgeRouting": "POLYLINE",
       "elk.spacing.nodeNode": "200",
       "elk.spacing.edgeNode": "200",
-      "elk.layered.spacing.nodeNodeBetweenLayers": "200",
+      "elk.layered.spacing.nodeNodeBetweenLayers": "150",
     },
     children: appNodes.map((node) => ({
       id: node.id,
