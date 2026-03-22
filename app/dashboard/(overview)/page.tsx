@@ -23,7 +23,6 @@ export default function App() {
   const onNodesChange = useSetAtom(onNodesChangeAtom);
   const onConnection = useSetAtom(onConnectChange);
   const { nds, eds } = useValidateNodes();
-
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <ReactFlow

@@ -2,7 +2,7 @@ export default function SwitchIcon() {
   return (
     <div className="text-foreground">
       <svg
-        viewBox="-15 -40 150 150"
+        viewBox="-15 -40 150 200"
         height={60}
         width={60}
         className={`cursor-pointer select-none`}

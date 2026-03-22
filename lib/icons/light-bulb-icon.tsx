@@ -3,9 +3,9 @@ export default function LightBulbIcon() {
     <div>
       <div style={{ position: "relative", width: 48, height: 48, padding: 0 }}>
         <svg
-          width={48}
-          height={48}
-          viewBox="0 0 24 24"
+          width="48"
+          height="48"
+          viewBox="-10  0 42 28"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>

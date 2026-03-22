@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import { nodesAtom } from "@/lib/atom/nodes";
 import { handleValidatedEdges } from "@/lib/helpers/edgeHelper";
 import { handleNodeChanges } from "@/lib/helpers/nodeHelper";
@@ -14,7 +14,7 @@ export default function useValidateNodes() {
     return handleNodeChanges({ nodes, edges });
   }, [nodes, edges]);
 
-  useMemo(() => {
+  useEffect(() => {
     const hasChanged = nodes.some(
       (node) => node.data.isOn !== nodePowerStates[node.id],
     );
