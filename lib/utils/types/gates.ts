@@ -1,10 +1,10 @@
-import { AppNode } from "@/lib/atom/nodes";
 import AndGateIcon from "@/lib/icons/and-gate-icon";
 import NorGateIcon from "@/lib/icons/nor-gate-icon";
 import NotGateIcon from "@/lib/icons/not-gate-icon";
 import OrGateIcon from "@/lib/icons/or-gate-icon";
 import { JSX } from "react/jsx-dev-runtime";
 import { CustomEdge } from "./edges";
+import { AppNode } from "./nodes";
 
 export type handleGateProps = {
   incoming: CustomEdge[];

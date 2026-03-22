@@ -44,7 +44,6 @@ export default function ThemeSwitcher() {
               className="px-2 hover:cursor-pointer"
             >
               <Icon className="h-[1.2rem] w-[1.2rem]" />
-              {/* Optional: Add a tooltip or visually hidden text for the label */}
               <span className="sr-only">{t.label}</span>
             </TabsTrigger>
           );

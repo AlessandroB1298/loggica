@@ -1,10 +1,10 @@
 "use client";
 import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "../components/sidebar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactFlowProvider } from "@xyflow/react";
 import { DnDProvider } from "../context/DnDContext";
 import TopBanner from "../components/topBanner";
+import { RelaxedSidebar } from "../components/sidebar/sidebar";
 
 export default function layout({
   children,
@@ -18,8 +18,8 @@ export default function layout({
       <QueryClientProvider client={queryClient}>
         <ReactFlowProvider>
           <DnDProvider>
-            <SidebarProvider>
-              <AppSidebar />
+            <SidebarProvider suppressHydrationWarning>
+              <RelaxedSidebar />
               <div className="fixed top-2 right-4 z-9999">
                 <TopBanner />
               </div>

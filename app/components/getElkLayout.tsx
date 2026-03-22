@@ -6,11 +6,17 @@ export type ElkDirectionType = "RIGHT" | "LEFT" | "UP" | "DOWN";
 import { CustomEdge } from "@/lib/utils/types/edges";
 import { AppNode } from "@/lib/utils/types/nodes";
 
-export default async function getElkLayout(
-  appNodes: AppNode[] = [],
-  customEdges: CustomEdge[] = [],
-  direction: ElkDirectionType = "RIGHT",
-) {
+type ElkLayoutType = {
+  appNodes: AppNode[];
+  customEdges: CustomEdge[];
+  direction: ElkDirectionType;
+};
+
+export default async function getElkLayout({
+  appNodes,
+  customEdges,
+  direction = "RIGHT",
+}: ElkLayoutType) {
   const isRight = direction === "RIGHT";
   const isLeft = direction === "LEFT";
   const isUp = direction === "UP";

@@ -20,15 +20,18 @@ export default function AutoLayout({
     if (edges.length === 0) {
       return;
     }
-    const { appNodes, customEdges } = await getElkLayout(
-      nodes,
-      edges,
-      direction,
-    );
+    const { appNodes, customEdges } = await getElkLayout({
+      appNodes: nodes,
+      customEdges: edges,
+      direction: direction,
+    });
     setNodes(appNodes);
     setEdges(customEdges);
     fitView();
+    console.log(`app nodes: ${JSON.stringify(nodes, null, 2)}`);
+    console.log(`custom edges: ${JSON.stringify(customEdges, null, 2)}`);
   }, [direction, nodes, edges, setNodes, setEdges, fitView]);
+
   return (
     <div>
       <Button variant="secondary" onClick={handleOnClick}>
