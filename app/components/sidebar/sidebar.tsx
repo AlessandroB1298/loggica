@@ -24,6 +24,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { Button } from "@/components/ui/button";
 import { switches } from "@/lib/utils/types/switches";
 import { outputs } from "@/lib/utils/types/outputs";
 import { useDnD } from "@/app/context/DnDContext";
@@ -41,7 +42,7 @@ export const RelaxedSidebar = memo(function SideBar() {
   const { onDragStart, isDragging } = useDnD();
   const [type, setType] = useState<string | null>(null);
   const createNewNode = useSetAtom(onCreateNewNode);
-  const SWITCHES_ID = "collapsible-switches";
+
   const addNewNode = useCallback(
     (nodeType: string) =>
       ({ position }: { position: XYPosition }) => {
@@ -73,108 +74,75 @@ export const RelaxedSidebar = memo(function SideBar() {
         <SidebarGroup>
           <SidebarGroupLabel>Nodes</SidebarGroupLabel>
           {isDragging && <DragGhost type={type} />}
-          <SidebarMenu>
-            <Collapsible defaultOpen className="group/collapsible">
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton
-                    tooltip="Switches"
-                    aria-controls={SWITCHES_ID}
+
+          <SidebarMenuSub>
+            <SidebarGroupLabel>Switches</SidebarGroupLabel>
+            {switches.map((sw) => {
+              const Icon = sw.icon;
+              return (
+                <SidebarMenuSubButton key={sw.name}>
+                  <div
+                    onPointerDown={(event) => {
+                      setType(sw.type);
+                      onDragStart(event, addNewNode(sw.type));
+                    }}
+                    className="cursor-grab"
                   >
-                    <ChevronRight className="transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                    <span>Switches</span>
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
+                    <div className="flex flex-row gap-2 items-center">
+                      <Icon />
+                    </div>
+                  </div>
+                </SidebarMenuSubButton>
+              );
+            })}
+          </SidebarMenuSub>
 
-                <CollapsibleContent id={SWITCHES_ID}>
-                  <SidebarMenuSub>
-                    {switches.map((sw) => (
-                      <SidebarMenuSubItem key={sw.name}>
-                        <SidebarMenuSubButton asChild>
-                          <div
-                            onPointerDown={(e) =>
-                              onDragStart(e, addNewNode(sw.type))
-                            }
-                            className="cursor-grab flex items-center gap-2 w-full"
-                          >
-                            <sw.icon />
-                            <span>{sw.name}</span>
-                          </div>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-
-            <Collapsible defaultOpen className="group/collapsible">
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton
-                    tooltip="Switches"
-                    aria-controls={SWITCHES_ID}
+          <SidebarMenuSub>
+            <SidebarGroupLabel>Outputs</SidebarGroupLabel>
+            {outputs.map((out) => {
+              const Icon = out.icon;
+              return (
+                <SidebarMenuSubButton key={out.name}>
+                  <div
+                    onPointerDown={(event) => {
+                      setType(out.type);
+                      onDragStart(event, addNewNode(out.type));
+                    }}
+                    className="curcor-grab"
                   >
-                    <ChevronRight className="transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                    <span>Outputs</span>
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
+                    <div className="flex flex-row gap-2 items-center">
+                      <Icon />
+                    </div>
+                  </div>
+                </SidebarMenuSubButton>
+              );
+            })}
+          </SidebarMenuSub>
 
-                <CollapsibleContent id={SWITCHES_ID}>
-                  <SidebarMenuSub>
-                    {outputs.map((out) => (
-                      <SidebarMenuSubItem key={out.name}>
-                        <SidebarMenuSubButton asChild>
-                          <div
-                            onPointerDown={(e) =>
-                              onDragStart(e, addNewNode(out.type))
-                            }
-                            className="cursor-grab flex items-center gap-2 w-full"
-                          >
-                            <out.icon />
-                          </div>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-
-            <Collapsible defaultOpen className="group/collapsible">
-              <SidebarMenuItem>
-                <CollapsibleTrigger asChild>
-                  <SidebarMenuButton
-                    tooltip="Switches"
-                    aria-controls={SWITCHES_ID}
-                  >
-                    <ChevronRight className="transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                    <span>Gates</span>
-                  </SidebarMenuButton>
-                </CollapsibleTrigger>
-
-                <CollapsibleContent id={SWITCHES_ID}>
-                  <SidebarMenuSub>
-                    {gates.map((gate) => (
-                      <SidebarMenuSubItem key={gate.name}>
-                        <SidebarMenuSubButton asChild>
-                          <div
-                            onPointerDown={(e) =>
-                              onDragStart(e, addNewNode(gate.type))
-                            }
-                            className="cursor-grab flex items-center gap-2 w-full"
-                          >
-                            <gate.icon />
-                            {gate.name}
-                          </div>
-                        </SidebarMenuSubButton>
-                      </SidebarMenuSubItem>
-                    ))}
-                  </SidebarMenuSub>
-                </CollapsibleContent>
-              </SidebarMenuItem>
-            </Collapsible>
-          </SidebarMenu>
+          <SidebarMenuSub>
+            <SidebarGroupLabel>Gates</SidebarGroupLabel>
+            {gates.map((gate) => {
+              const Icon = gate.icon;
+              return (
+                <SidebarMenuSubItem key={gate.name}>
+                  <SidebarMenuSubButton asChild>
+                    <div
+                      onPointerDown={(event) => {
+                        setType(gate.type);
+                        onDragStart(event, addNewNode(gate.type));
+                      }}
+                      className="cursor-grab"
+                    >
+                      <div className="flex flex-row gap-2 items-center ">
+                        <Icon />
+                        {gate.name}
+                      </div>
+                    </div>
+                  </SidebarMenuSubButton>
+                </SidebarMenuSubItem>
+              );
+            })}
+          </SidebarMenuSub>
         </SidebarGroup>
       </SidebarContent>
 
