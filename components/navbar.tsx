@@ -1,12 +1,7 @@
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  Link,
-} from "@heroui/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@heroui/react";
 import { Button } from "./ui/button";
 import { LoggicaIcon } from "@/lib/icons/loggica-icon";
+import Link from "next/link";
 
 export default function NavbarComponent() {
   return (
@@ -30,7 +25,9 @@ export default function NavbarComponent() {
       <NavbarContent justify="end">
         <NavbarItem className="mt-1">
           <Button className="bg-blue-500 h-6 hover:bg-blue-500/90">
-            <p className="text-blue-100">Sign Up</p>
+            <Link href={"/sign-up"}>
+              <p className="text-blue-100">Sign Up</p>
+            </Link>
           </Button>
         </NavbarItem>
       </NavbarContent>

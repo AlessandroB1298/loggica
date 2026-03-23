@@ -5,7 +5,7 @@ import { ReactFlowProvider } from "@xyflow/react";
 import { DnDProvider } from "../context/DnDContext";
 import TopBanner from "../components/topBanner";
 import { RelaxedSidebar } from "../components/sidebar/sidebar";
-
+import { ClerkProvider } from "@clerk/nextjs";
 export default function layout({
   children,
 }: Readonly<{
@@ -18,13 +18,15 @@ export default function layout({
       <QueryClientProvider client={queryClient}>
         <ReactFlowProvider>
           <DnDProvider>
-            <SidebarProvider suppressHydrationWarning>
-              <RelaxedSidebar />
-              <div className="fixed top-2 right-4 z-9999">
-                <TopBanner />
-              </div>
-              <main>{children}</main>
-            </SidebarProvider>
+            <ClerkProvider>
+              <SidebarProvider suppressHydrationWarning>
+                <RelaxedSidebar />
+                <div className="fixed top-2 right-4 z-9999">
+                  <TopBanner />
+                </div>
+                <main>{children}</main>
+              </SidebarProvider>
+            </ClerkProvider>
           </DnDProvider>
         </ReactFlowProvider>
       </QueryClientProvider>
