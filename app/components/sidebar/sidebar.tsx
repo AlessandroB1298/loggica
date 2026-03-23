@@ -193,6 +193,7 @@ export const RelaxedSidebar = memo(function SideBar() {
           }}
         />
       </SidebarFooter>
+      <SidebarRail />
     </Sidebar>
   );
 });
