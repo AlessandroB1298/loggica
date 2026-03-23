@@ -24,7 +24,6 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
 import { switches } from "@/lib/utils/types/switches";
 import { outputs } from "@/lib/utils/types/outputs";
 import { useDnD } from "@/app/context/DnDContext";
@@ -42,7 +41,7 @@ export const RelaxedSidebar = memo(function SideBar() {
   const { onDragStart, isDragging } = useDnD();
   const [type, setType] = useState<string | null>(null);
   const createNewNode = useSetAtom(onCreateNewNode);
-
+  const SWITCHES_ID = "collapsible-switches";
   const addNewNode = useCallback(
     (nodeType: string) =>
       ({ position }: { position: XYPosition }) => {
@@ -74,106 +73,108 @@ export const RelaxedSidebar = memo(function SideBar() {
         <SidebarGroup>
           <SidebarGroupLabel>Nodes</SidebarGroupLabel>
           {isDragging && <DragGhost type={type} />}
+          <SidebarMenu>
+            <Collapsible defaultOpen className="group/collapsible">
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton
+                    tooltip="Switches"
+                    aria-controls={SWITCHES_ID}
+                  >
+                    <ChevronRight className="transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                    <span>Switches</span>
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
 
-          <Collapsible defaultOpen className="group/collapsible">
-            <CollapsibleTrigger asChild>
-              <div className="w-full">
-                <Button className="mb-2 mt-2 w-full" variant="ghost">
-                  Switches
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </Button>
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                {switches.map((sw) => {
-                  const Icon = sw.icon;
-                  return (
-                    <SidebarMenuSubButton key={sw.name}>
-                      <div
-                        onPointerDown={(event) => {
-                          setType(sw.type);
-                          onDragStart(event, addNewNode(sw.type));
-                        }}
-                        className="cursor-grab"
-                      >
-                        <div className="flex flex-row gap-2 items-center">
-                          <Icon />
-                        </div>
-                      </div>
-                    </SidebarMenuSubButton>
-                  );
-                })}
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </Collapsible>
-          <Collapsible defaultOpen className="group/collapsible">
-            <CollapsibleTrigger asChild>
-              <div className="w-full">
-                <Button className="mb-2 mt-2 w-full" variant="ghost">
-                  Outputs
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </Button>
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                {outputs.map((out) => {
-                  const Icon = out.icon;
-                  return (
-                    <SidebarMenuSubButton key={out.name}>
-                      <div
-                        onPointerDown={(event) => {
-                          setType(out.type);
-                          onDragStart(event, addNewNode(out.type));
-                        }}
-                        className="curcor-grab"
-                      >
-                        <div className="flex flex-row gap-2 items-center">
-                          <Icon />
-                        </div>
-                      </div>
-                    </SidebarMenuSubButton>
-                  );
-                })}
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </Collapsible>
-          <Collapsible defaultOpen className="group/collapsible">
-            <CollapsibleTrigger asChild>
-              <div className="w-full">
-                <Button className="mb-2 w-full" variant="ghost">
-                  Logical Gates
-                  <ChevronRight className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                </Button>
-              </div>
-            </CollapsibleTrigger>
-            <CollapsibleContent>
-              <SidebarMenuSub>
-                {gates.map((gate) => {
-                  const Icon = gate.icon;
-                  return (
-                    <SidebarMenuSubItem key={gate.name}>
-                      <SidebarMenuSubButton asChild>
-                        <div
-                          onPointerDown={(event) => {
-                            setType(gate.type);
-                            onDragStart(event, addNewNode(gate.type));
-                          }}
-                          className="cursor-grab"
-                        >
-                          <div className="flex flex-row gap-2 items-center ">
-                            <Icon />
+                <CollapsibleContent id={SWITCHES_ID}>
+                  <SidebarMenuSub>
+                    {switches.map((sw) => (
+                      <SidebarMenuSubItem key={sw.name}>
+                        <SidebarMenuSubButton asChild>
+                          <div
+                            onPointerDown={(e) =>
+                              onDragStart(e, addNewNode(sw.type))
+                            }
+                            className="cursor-grab flex items-center gap-2 w-full"
+                          >
+                            <sw.icon />
+                            <span>{sw.name}</span>
+                          </div>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+
+            <Collapsible defaultOpen className="group/collapsible">
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton
+                    tooltip="Switches"
+                    aria-controls={SWITCHES_ID}
+                  >
+                    <ChevronRight className="transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                    <span>Outputs</span>
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+
+                <CollapsibleContent id={SWITCHES_ID}>
+                  <SidebarMenuSub>
+                    {outputs.map((out) => (
+                      <SidebarMenuSubItem key={out.name}>
+                        <SidebarMenuSubButton asChild>
+                          <div
+                            onPointerDown={(e) =>
+                              onDragStart(e, addNewNode(out.type))
+                            }
+                            className="cursor-grab flex items-center gap-2 w-full"
+                          >
+                            <out.icon />
+                          </div>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+
+            <Collapsible defaultOpen className="group/collapsible">
+              <SidebarMenuItem>
+                <CollapsibleTrigger asChild>
+                  <SidebarMenuButton
+                    tooltip="Switches"
+                    aria-controls={SWITCHES_ID}
+                  >
+                    <ChevronRight className="transition-transform group-data-[state=open]/collapsible:rotate-90" />
+                    <span>Gates</span>
+                  </SidebarMenuButton>
+                </CollapsibleTrigger>
+
+                <CollapsibleContent id={SWITCHES_ID}>
+                  <SidebarMenuSub>
+                    {gates.map((gate) => (
+                      <SidebarMenuSubItem key={gate.name}>
+                        <SidebarMenuSubButton asChild>
+                          <div
+                            onPointerDown={(e) =>
+                              onDragStart(e, addNewNode(gate.type))
+                            }
+                            className="cursor-grab flex items-center gap-2 w-full"
+                          >
+                            <gate.icon />
                             {gate.name}
                           </div>
-                        </div>
-                      </SidebarMenuSubButton>
-                    </SidebarMenuSubItem>
-                  );
-                })}
-              </SidebarMenuSub>
-            </CollapsibleContent>
-          </Collapsible>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </CollapsibleContent>
+              </SidebarMenuItem>
+            </Collapsible>
+          </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
 
