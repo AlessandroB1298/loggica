@@ -86,8 +86,6 @@ export const RelaxedSidebar = memo(function SideBar() {
             </CollapsibleTrigger>
             <CollapsibleContent>
               <SidebarMenuSub>
-                {isDragging && <DragGhost type={type} />}
-
                 {switches.map((sw) => {
                   const Icon = sw.icon;
                   return (
@@ -155,20 +153,22 @@ export const RelaxedSidebar = memo(function SideBar() {
                 {gates.map((gate) => {
                   const Icon = gate.icon;
                   return (
-                    <SidebarMenuSubButton key={gate.name}>
-                      <div
-                        onPointerDown={(event) => {
-                          setType(gate.type);
-                          onDragStart(event, addNewNode(gate.type));
-                        }}
-                        className="cursor-grab"
-                      >
-                        <div className="flex flex-row gap-2 items-center m-2">
-                          <Icon />
-                          {gate.name}
+                    <SidebarMenuSubItem key={gate.name}>
+                      <SidebarMenuSubButton asChild>
+                        <div
+                          onPointerDown={(event) => {
+                            setType(gate.type);
+                            onDragStart(event, addNewNode(gate.type));
+                          }}
+                          className="cursor-grab"
+                        >
+                          <div className="flex flex-row gap-2 items-center ">
+                            <Icon />
+                            {gate.name}
+                          </div>
                         </div>
-                      </div>
-                    </SidebarMenuSubButton>
+                      </SidebarMenuSubButton>
+                    </SidebarMenuSubItem>
                   );
                 })}
               </SidebarMenuSub>
