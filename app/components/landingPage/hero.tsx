@@ -4,8 +4,6 @@ import Link from "next/link";
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { BackgroundRippleEffect } from "@/components/ui/background-ripple-effect";
-import AndGateIcon from "@/lib/icons/and-gate-icon";
 import { AuroraText } from "@/components/ui/auoraText";
 
 export default function LandingPage() {
@@ -16,7 +14,7 @@ export default function LandingPage() {
   useGSAP(() => {
     const tl = gsap.timeline({
       defaults: { duration: 0.8, ease: "power3.out" },
-      onComplete: () => {},
+      onComplete: () => { },
     });
 
     tl.fromTo(
@@ -89,7 +87,7 @@ export default function LandingPage() {
               ref={buttonRef}
               className="flex flex-col sm:flex-row gap-4 mt-4 z-[9999]"
             >
-              <Link href={"/dashboard/"}>
+              <Link href={"/sign-in"}>
                 <Button
                   size="lg"
                   className="bg-blue-500 text-primary-foreground hover:bg-blue-500/60 shadow-lg"
@@ -98,7 +96,10 @@ export default function LandingPage() {
                 </Button>
               </Link>
 
-              <Link href="https://github.com/AlessandroB1298/loggica">
+              <Link
+                target="_blank"
+                href="https://github.com/AlessandroB1298/loggica"
+              >
                 <Button
                   size="lg"
                   variant="default"

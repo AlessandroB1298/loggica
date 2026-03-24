@@ -11,6 +11,7 @@
     "test-cov": "jest --coverage"
   },
   "dependencies": {
+    "@clerk/nextjs": "^7.0.6",
     "@gsap/react": "^2.1.2",
     "@heroui/navbar": "^2.2.30",
     "@heroui/react": "^2.8.10",

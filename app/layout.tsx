@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "./components/themeProvider";
 import { ReactFlowProvider } from "@xyflow/react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 export const metadata: Metadata = {
   title: "Loggica",
@@ -15,17 +16,19 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          themes={["light", "dark"]}
-        >
-          <ReactFlowProvider>
-            <main>{children}</main>
-          </ReactFlowProvider>
-        </ThemeProvider>
-      </body>
+      <ClerkProvider>
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            themes={["light", "dark"]}
+          >
+            <ReactFlowProvider>
+              <main>{children}</main>
+            </ReactFlowProvider>
+          </ThemeProvider>
+        </body>
+      </ClerkProvider>
     </html>
   );
 }

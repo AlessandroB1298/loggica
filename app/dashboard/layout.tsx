@@ -5,7 +5,6 @@ import { ReactFlowProvider } from "@xyflow/react";
 import { DnDProvider } from "../context/DnDContext";
 import TopBanner from "../components/topBanner";
 import { RelaxedSidebar } from "../components/sidebar/sidebar";
-
 export default function layout({
   children,
 }: Readonly<{
