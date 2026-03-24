@@ -25,7 +25,7 @@ export function VersionSwitcher() {
               <GitCompareArrows className="size-4" />
             </div>
             <div className="flex flex-col gap-0.5 leading-none">
-              <span className="font-medium">Loggica</span>
+              <span className="font-bold">LOGGICA</span>
             </div>
           </SidebarMenuButton>
           <DropdownMenuContent
