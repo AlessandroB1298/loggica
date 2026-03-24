@@ -7,7 +7,6 @@ import {
   SidebarGroup,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
@@ -15,16 +14,11 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { ChevronRight, Projector } from "lucide-react";
+import { Projector } from "lucide-react";
 import { projects } from "@/lib/constants/projects";
 import { VersionSwitcher } from "./sidebarHeader";
 import { gates } from "@/lib/utils/types/gates";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
+
 import { switches } from "@/lib/utils/types/switches";
 import { outputs } from "@/lib/utils/types/outputs";
 import { useDnD } from "@/app/context/DnDContext";
